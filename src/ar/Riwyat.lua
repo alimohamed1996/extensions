@@ -45,14 +45,21 @@ return Require("Madara")(baseURL, {
 	chaptersScriptLoaded = true,
     novelPageTitleSel = "h1",
 	getPassage = function (url)
-        local res = Document(Request(GET(expandURL(url))):body():string():gsub("html","div"):gsub("&nbsp;", ""))
+		local res = GETDocument(expandURL(url))
 		local htmlElement = res:selectFirst("div.text-center")
 		htmlElement:select("div span font"):remove()
 		htmlElement:select("div > a"):remove()
 		htmlElement:select("div.ad > h3"):remove()
 		htmlElement:select("div.ad > h4"):remove()
-
 		return pageOfElem(htmlElement)
+        -- local res = Document(Request(GET(expandURL(url))):body():string():gsub("html","div"):gsub("&nbsp;", ""))
+		-- local htmlElement = res:selectFirst("div.text-center")
+		-- htmlElement:select("div span font"):remove()
+		-- htmlElement:select("div > a"):remove()
+		-- htmlElement:select("div.ad > h3"):remove()
+		-- htmlElement:select("div.ad > h4"):remove()
+
+		-- return pageOfElem(htmlElement)
  
 	end
 
